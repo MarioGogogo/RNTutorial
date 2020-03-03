@@ -1,19 +1,21 @@
 import React, { Component } from 'react';
-import { View, FlatList, Text, ActivityIndicator, StyleSheet } from 'react-native';
+import { View, SectionList, Text, ActivityIndicator, StyleSheet } from 'react-native';
 import { queryMovies, comingMovies } from '../common/Serice';
 import MovieItemCell from './MovieItemCell';
 import HeaderIconButtonExample from '../common/Header';
-export default class MovieListScreen extends Component {
+
+export default class MovieListSectionList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      movieList : [], // 电影列表的数据源
-      loaded    : false // 用来控制loading视图的显示，当数据加载完成，loading视图不再显示
+      displayingMovies : [], // 正在上映的电影数据
+      incomingMovies   : [], // 即将上映的电影数据
+      sectionData      : [], // SectionList数据源
+      loaded           : false // 用来控制loading视图的显示，当数据加载完成，loading视图不再显示
     };
   }
 
   componentDidMount() {
-    // this.loadComingMovies();
     this.loadDisplayingMovies();
   }
 
@@ -28,11 +30,29 @@ export default class MovieListScreen extends Component {
     }
     return (
       <View style={{ flex: 1 }}>
-        <HeaderIconButtonExample />
-        <FlatList data={this.state.movieList} renderItem={this._renderItem} keyExtractor={(item) => item.id} />
+        <HeaderIconButtonExample title={'豆瓣电影'} />
+        <SectionList
+          keyExtractor={this._keyExtractor}
+          renderSectionHeader={this._renderSectionHeader}
+          renderItem={this._renderItem}
+          sections={this.state.sectionData}
+        />
       </View>
     );
   }
+
+  _keyExtractor = (item) => item.id;
+
+  _renderSectionHeader = (item) => {
+    let sectionObj = item.section;
+    let sectionIndex = sectionObj.index;
+    let title = sectionIndex === 0 ? '正在上映' : '即将上映';
+    return (
+      <View style={styles.sectionHeader}>
+        <Text style={styles.sectionTitle}>{title}</Text>
+      </View>
+    );
+  };
 
   _renderItem = (item) => {
     return (
@@ -46,7 +66,7 @@ export default class MovieListScreen extends Component {
   };
 
   /**
-   * 加载正在上映的电影列表，此处默认城市为北京，取20条数据显示
+   * 先加载正在上映的电影列表，如果加载成功，接着获取即将上映的电影数据
    */
   loadDisplayingMovies() {
     let that = this;
@@ -83,10 +103,15 @@ export default class MovieListScreen extends Component {
           movieItem['actorNames'] = actors;
           movies.push(movieItem);
         }
-        that.setState({
-          movieList : movies,
-          loaded    : true
-        });
+        that.setState(
+          {
+            displayingMovies : movies
+          },
+          () => {
+            // 加载完正在上映的电影后再接着加载即将上映的电影数据
+            that.loadComingMovies();
+          }
+        );
       })
       .catch((e) => {
         console.log('加载失败');
@@ -98,7 +123,7 @@ export default class MovieListScreen extends Component {
   }
 
   /**
-   * 加载即将上映的电影列表，此处默认城市为北京，取20条数据显示
+   * 加载即将上映的电影列表，并更新sectionData刷新列表
    */
   loadComingMovies() {
     let that = this;
@@ -138,9 +163,12 @@ export default class MovieListScreen extends Component {
           movieItem['actorNames'] = actors;
           movies.push(movieItem);
         }
+        // 两个电影数据都加载完成后需要更新sectionData，将数据在界面上显示出来
+        let sectionList = [ { data: that.state.displayingMovies, index: 0 }, { data: movies, index: 1 } ];
         that.setState({
-          movieList : movies,
-          loaded    : true
+          loaded         : true,
+          incomingMovies : movies,
+          sectionData    : sectionList
         });
       })
       .catch((error) => {
@@ -154,11 +182,19 @@ export default class MovieListScreen extends Component {
 }
 
 const styles = StyleSheet.create({
-  loadingView : {
+  loadingView   : {
     flex           : 1,
     flexDirection  : 'row',
     justifyContent : 'center',
     alignItems     : 'center',
     padding        : 10
+  },
+  sectionHeader : {
+    padding         : 10,
+    backgroundColor : '#f3c2a1'
+  },
+  sectionTitle  : {
+    fontSize   : 18,
+    fontWeight : 'bold'
   }
 });

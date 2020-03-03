@@ -16,6 +16,7 @@ import SimpleListScreen from './screens/ListView/SimpleListScreen';
 import SectionListScreen from './screens/ListView/SectionListScreen';
 import GroupListScreen from './screens/ListView/GroupListScreen';
 import GridLayoutScreen from './screens/ListView/GridLayoutScreen';
+import SectionListPage from './screens/SectionList';
 export default class App extends Component {
   render() {
     return (
@@ -27,7 +28,8 @@ export default class App extends Component {
           <Scene key='sectionlistscreen' hideNavBar component={SectionListScreen} />
           <Scene key='grouplistscreen' hideNavBar component={GroupListScreen} />
           <Scene key='gridlayoutscreen' hideNavBar component={GridLayoutScreen} />
-          <Scene hideNavBar key='flatlist' component={FlatListPage} title='flatlist' />
+          <Scene hideNavBar key='flatlist' component={FlatListPage} />
+          <Scene hideNavBar key='sectionlist' component={SectionListPage} />
         </Scene>
         {/* Loading和Toash全局加载 */}
       </Router>

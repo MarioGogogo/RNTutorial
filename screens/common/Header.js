@@ -3,6 +3,7 @@ import { Container, Header, Left, Body, Right, Button, Icon, Title, Text } from 
 import { Actions } from 'react-native-router-flux';
 export default class HeaderIconButtonExample extends Component {
   render() {
+    const { title } = this.props;
     return (
       <Header>
         <Left>
@@ -11,7 +12,7 @@ export default class HeaderIconButtonExample extends Component {
           </Button>
         </Left>
         <Body>
-          <Title>Header</Title>
+          <Title>{title ? title : Header}</Title>
         </Body>
         <Right>
           <Button transparent onPress={() => Actions.popTo(2)}>

@@ -9,5 +9,8 @@ RN优点是跨平台、JS代码和样式开发UI迅速、HotReload、热修复�
 
 ### ListView
 ### FlatList
+例子中高仿豆瓣 接口 (感谢分享)
+ https://douban.uieee.com/   
+ https://douban-api-docs.zce.me/movie.html#in_theaters
 
 

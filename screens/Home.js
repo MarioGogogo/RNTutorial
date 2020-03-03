@@ -19,6 +19,13 @@ export default class Home extends Component {
         >
           <Text> To Flatlist </Text>
         </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => {
+            Actions.sectionlist();
+          }}
+        >
+          <Text> To SectionList </Text>
+        </TouchableOpacity>
       </View>
     );
   }
