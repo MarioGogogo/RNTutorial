@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View } from 'react-native';
+import { View, Text } from 'react-native';
 import RefreshListView from './RefreshListView';
 import { queryMovies } from '../common/Serice';
 import MovieItemCell from './MovieItemCell';
@@ -56,7 +56,13 @@ export default class MovieListPullRefresh extends Component {
 
   /// 渲染一个空白页，当列表无数据的时候显示。这里简单写成一个View控件
   _renderEmptyView = (item) => {
-    return <View />;
+    return (
+      <View
+        style={{ marginTop: 50, height: 50, justifyContent: 'center', alignItems: 'center', backgroundColor: 'red' }}
+      >
+        <Text>空白列表</Text>
+      </View>
+    );
   };
 
   /**

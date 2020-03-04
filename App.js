@@ -18,6 +18,10 @@ import GroupListScreen from './screens/ListView/GroupListScreen';
 import GridLayoutScreen from './screens/ListView/GridLayoutScreen';
 import SectionListPage from './screens/SectionList';
 import PullRefreshScreen from './screens/PullRefresh';
+import TexTInputScreen from './screens/TextInput';
+import RegisterScreen from './screens/TextInput/RegisterScreen';
+import AutoNewLineInputScreen from './screens/TextInput/AutoNewLineInput';
+import AutoHeightInputScreen from './screens/TextInput/AutoHeightInput';
 
 export default class App extends Component {
   render() {
@@ -33,6 +37,10 @@ export default class App extends Component {
           <Scene hideNavBar key='flatlist' component={FlatListPage} />
           <Scene hideNavBar key='sectionlist' component={SectionListPage} />
           <Scene hideNavBar key='pullrefresh' component={PullRefreshScreen} />
+          <Scene hideNavBar key='textinput' component={TexTInputScreen} />
+          <Scene hideNavBar key='register' component={RegisterScreen} />
+          <Scene hideNavBar key='autonewlineinput' component={AutoNewLineInputScreen} />
+          <Scene hideNavBar key='autoheightinput' component={AutoHeightInputScreen} />
         </Scene>
         {/* Loading和Toash全局加载 */}
       </Router>
