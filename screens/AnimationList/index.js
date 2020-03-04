@@ -35,58 +35,24 @@ export default class AnimationList extends React.Component {
         Actions.shoppingtocart({ title: '添加商品到购物车动画2' });
         break;
       case 2:
-        // Actions.push({
-        //   screen         : 'ScanQR',
-        //   title          : '二维码扫描动画',
-        //   navigatorStyle : {
-        //     tabBarHidden : true
-        //   }
-        // });
+        Actions.scanqrcode({ title: '二维码扫描动画' });
         break;
       case 3:
-        // Actions.push({
-        //   screen         : 'MenuButton',
-        //   title          : '菜单按钮动画',
-        //   navigatorStyle : {
-        //     tabBarHidden : true
-        //   }
-        // });
+        Actions.menubutton({ title: '菜单按钮动画' });
         break;
       case 4:
-        // Actions.push({
-        //   screen         : 'Alert',
-        //   title          : '弹窗动画',
-        //   navigatorStyle : {
-        //     tabBarHidden : true
-        //   }
-        // });
+        Actions.alert({ title: '弹窗动画' });
+
         break;
       case 5:
-        // Actions.push({
-        //   screen         : 'Loading',
-        //   title          : 'Loading动画',
-        //   navigatorStyle : {
-        //     tabBarHidden : true
-        //   }
-        // });
+        Actions.loading({ title: 'Loading动画' });
+
         break;
       case 6:
-        // Actions.push({
-        //   screen         : 'Danmu',
-        //   title          : '模拟弹幕动画',
-        //   navigatorStyle : {
-        //     tabBarHidden : true
-        //   }
-        // });
+        Actions.danmu({ title: '模拟弹幕动画' });
         break;
       case 7:
-        // Actions.push({
-        //   screen         : 'ScrollCard',
-        //   title          : '卡片滑动缩放动画',
-        //   navigatorStyle : {
-        //     tabBarHidden : true
-        //   }
-        // });
+        Actions.scrollcard({ title: '卡片滑动缩放动画' });
         break;
     }
   }

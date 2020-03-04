@@ -6659,6 +6659,11 @@ react-native-spinkit@1.3.0:
   dependencies:
     prop-types "^15.5.8"
 
+react-native-swipe-list-view@^2.3.0:
+  version "2.3.0"
+  resolved "https://registry.npm.taobao.org/react-native-swipe-list-view/download/react-native-swipe-list-view-2.3.0.tgz#db7e35af8e38a6cd65d041827a3d4f3ebd25b4b8"
+  integrity sha1-2341r444ps1l0EGCej1PPr0ltLg=
+
 react-native-swiper@1.5.14:
   version "1.5.14"
   resolved "https://registry.npm.taobao.org/react-native-swiper/download/react-native-swiper-1.5.14.tgz#1c6f949ca377186300f972bb0f30d24062c899aa"

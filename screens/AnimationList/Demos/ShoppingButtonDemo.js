@@ -131,7 +131,7 @@ export default class ShoppingButtonDemo extends React.Component {
         duration : 100
       }),
       Animated.spring(this.state.bounceValue, {
-        toValue  : 2.0,
+        toValue  : 1.0,
         friction : 3,
         tension  : 40
       })

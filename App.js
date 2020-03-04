@@ -17,6 +17,7 @@ import SectionListScreen from './screens/ListView/SectionListScreen';
 import GroupListScreen from './screens/ListView/GroupListScreen';
 import GridLayoutScreen from './screens/ListView/GridLayoutScreen';
 import SectionListPage from './screens/SectionList';
+import SwipeListView from './screens/SwipeList';
 import PullRefreshScreen from './screens/PullRefresh';
 import TexTInputScreen from './screens/TextInput';
 import RegisterScreen from './screens/TextInput/RegisterScreen';
@@ -25,6 +26,13 @@ import AutoHeightInputScreen from './screens/TextInput/AutoHeightInput';
 import AnimationListScreen from './screens/AnimationList';
 import ShoppingButtonDemo from './screens/AnimationList/Demos/ShoppingButtonDemo';
 import ShoppingToCartDemo from './screens/AnimationList/Demos/ShoppingToCartDemo';
+import ScanQRCodeAnimation from './screens/AnimationList/Demos/ScanQRCodeAnimation';
+import MenuButtonAnimation from './screens/AnimationList/Demos/MenuButtonAnimation';
+import AlertAnimation from './screens/AnimationList/Demos/AlertAnimation';
+import LoadingAnimation from './screens/AnimationList/Demos/LoadingAnimation';
+import DanmuAnimation from './screens/AnimationList/Demos/DanmuAnimation';
+import ScrollCardAnimation from './screens/AnimationList/Demos/ScrollCardAnimation';
+
 export default class App extends Component {
   render() {
     return (
@@ -38,6 +46,7 @@ export default class App extends Component {
           <Scene key='gridlayoutscreen' hideNavBar component={GridLayoutScreen} />
           <Scene hideNavBar key='flatlist' component={FlatListPage} />
           <Scene hideNavBar key='sectionlist' component={SectionListPage} />
+          <Scene hideNavBar key='swipelist' component={SwipeListView} />
           <Scene hideNavBar key='pullrefresh' component={PullRefreshScreen} />
           <Scene hideNavBar key='textinput' component={TexTInputScreen} />
           <Scene hideNavBar key='register' component={RegisterScreen} />
@@ -46,6 +55,12 @@ export default class App extends Component {
           <Scene hideNavBar key='animationlist' component={AnimationListScreen} />
           <Scene hideNavBar key='shoppingbutton' component={ShoppingButtonDemo} />
           <Scene hideNavBar key='shoppingtocart' component={ShoppingToCartDemo} />
+          <Scene hideNavBar key='scanqrcode' component={ScanQRCodeAnimation} />
+          <Scene hideNavBar key='menubutton' component={MenuButtonAnimation} />
+          <Scene hideNavBar key='alert' component={AlertAnimation} />
+          <Scene hideNavBar key='loading' component={LoadingAnimation} />
+          <Scene hideNavBar key='danmu' component={DanmuAnimation} />
+          <Scene hideNavBar key='scrollcard' component={ScrollCardAnimation} />
         </Scene>
         {/* Loading和Toash全局加载 */}
       </Router>
