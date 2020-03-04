@@ -26,6 +26,13 @@ export default class Home extends Component {
         >
           <Text> To SectionList </Text>
         </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => {
+            Actions.pullrefresh();
+          }}
+        >
+          <Text> To PullRefresh </Text>
+        </TouchableOpacity>
       </View>
     );
   }

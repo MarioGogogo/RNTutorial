@@ -17,6 +17,8 @@ import SectionListScreen from './screens/ListView/SectionListScreen';
 import GroupListScreen from './screens/ListView/GroupListScreen';
 import GridLayoutScreen from './screens/ListView/GridLayoutScreen';
 import SectionListPage from './screens/SectionList';
+import PullRefreshScreen from './screens/PullRefresh';
+
 export default class App extends Component {
   render() {
     return (
@@ -30,6 +32,7 @@ export default class App extends Component {
           <Scene key='gridlayoutscreen' hideNavBar component={GridLayoutScreen} />
           <Scene hideNavBar key='flatlist' component={FlatListPage} />
           <Scene hideNavBar key='sectionlist' component={SectionListPage} />
+          <Scene hideNavBar key='pullrefresh' component={PullRefreshScreen} />
         </Scene>
         {/* Loading和Toash全局加载 */}
       </Router>

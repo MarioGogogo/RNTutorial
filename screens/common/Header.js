@@ -12,7 +12,7 @@ export default class HeaderIconButtonExample extends Component {
           </Button>
         </Left>
         <Body>
-          <Title>{title ? title : Header}</Title>
+          <Title>{title ? title : 'Header'}</Title>
         </Body>
         <Right>
           <Button transparent onPress={() => Actions.popTo(2)}>
