@@ -22,7 +22,9 @@ import TexTInputScreen from './screens/TextInput';
 import RegisterScreen from './screens/TextInput/RegisterScreen';
 import AutoNewLineInputScreen from './screens/TextInput/AutoNewLineInput';
 import AutoHeightInputScreen from './screens/TextInput/AutoHeightInput';
-
+import AnimationListScreen from './screens/AnimationList';
+import ShoppingButtonDemo from './screens/AnimationList/Demos/ShoppingButtonDemo';
+import ShoppingToCartDemo from './screens/AnimationList/Demos/ShoppingToCartDemo';
 export default class App extends Component {
   render() {
     return (
@@ -41,6 +43,9 @@ export default class App extends Component {
           <Scene hideNavBar key='register' component={RegisterScreen} />
           <Scene hideNavBar key='autonewlineinput' component={AutoNewLineInputScreen} />
           <Scene hideNavBar key='autoheightinput' component={AutoHeightInputScreen} />
+          <Scene hideNavBar key='animationlist' component={AnimationListScreen} />
+          <Scene hideNavBar key='shoppingbutton' component={ShoppingButtonDemo} />
+          <Scene hideNavBar key='shoppingtocart' component={ShoppingToCartDemo} />
         </Scene>
         {/* Loading和Toash全局加载 */}
       </Router>

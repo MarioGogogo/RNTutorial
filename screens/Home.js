@@ -49,6 +49,14 @@ export default class Home extends Component {
                 <Icon name='arrow-forward' />
               </Right>
             </ListItem>
+            <ListItem onPress={() => Actions.animationlist()}>
+              <Left>
+                <Text> To Animation</Text>
+              </Left>
+              <Right>
+                <Icon name='arrow-forward' />
+              </Right>
+            </ListItem>
           </List>
         </Content>
       </Container>
