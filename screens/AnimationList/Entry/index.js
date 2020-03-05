@@ -2,20 +2,10 @@ import React from 'react';
 import { StyleSheet, View, Text, FlatList, TouchableHighlight, PixelRatio } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { Actions } from 'react-native-router-flux';
-import HeaderIconButtonExample from '../common/Header';
-const demoItems = [
-  '添加商品到购物车动画1',
-  '添加商品到购物车动画2',
-  '二维码扫描动画',
-  '菜单按钮动画',
-  '弹窗动画',
-  '自定义Loading动画',
-  '模拟弹幕动画',
-  '卡片缩放动画',
-  '入门动画'
-];
+import HeaderIconButtonExample from '../../common/Header';
+const demoItems = [ 'Timing1', '展开列表动画' ];
 
-export default class AnimationList extends React.Component {
+export default class EntryAnimation extends React.Component {
   render() {
     return (
       <View style={styles.container}>
@@ -39,10 +29,10 @@ export default class AnimationList extends React.Component {
   onClickListItem(item, index) {
     switch (index) {
       case 0:
-        Actions.shoppingbutton({ title: '添加商品到购物车动画1' });
+        Actions.entry1({ title: 'Timing1' });
         break;
       case 1:
-        Actions.shoppingtocart({ title: '添加商品到购物车动画2' });
+        Actions.spreadlist({ title: '展开列表动画' });
         break;
       case 2:
         Actions.scanqrcode({ title: '二维码扫描动画' });

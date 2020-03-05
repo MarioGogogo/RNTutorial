@@ -32,7 +32,9 @@ import AlertAnimation from './screens/AnimationList/Demos/AlertAnimation';
 import LoadingAnimation from './screens/AnimationList/Demos/LoadingAnimation';
 import DanmuAnimation from './screens/AnimationList/Demos/DanmuAnimation';
 import ScrollCardAnimation from './screens/AnimationList/Demos/ScrollCardAnimation';
-
+import EntryAnimation from './screens/AnimationList/Entry';
+import TimingAnimation from './screens/AnimationList/Entry/TimingAnimation';
+import SpreadList from './screens/AnimationList/Entry/SpreadList';
 export default class App extends Component {
   render() {
     return (
@@ -61,6 +63,9 @@ export default class App extends Component {
           <Scene hideNavBar key='loading' component={LoadingAnimation} />
           <Scene hideNavBar key='danmu' component={DanmuAnimation} />
           <Scene hideNavBar key='scrollcard' component={ScrollCardAnimation} />
+          <Scene hideNavBar key='entryanimation' component={EntryAnimation} />
+          <Scene hideNavBar key='entry1' component={TimingAnimation} />
+          <Scene hideNavBar key='spreadlist' component={SpreadList} />
         </Scene>
         {/* Loading和Toash全局加载 */}
       </Router>

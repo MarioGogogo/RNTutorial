@@ -19,3 +19,5 @@ RN优点是跨平台、JS代码和样式开发UI迅速、HotReload、热修复�
  https://douban-api-docs.zce.me/movie.html#in_theaters
 
 
+播放器截屏
+https://github.com/sishuguojixuefu/react-native-screenshot
