@@ -35,6 +35,10 @@ import ScrollCardAnimation from './screens/AnimationList/Demos/ScrollCardAnimati
 import EntryAnimation from './screens/AnimationList/Entry';
 import TimingAnimation from './screens/AnimationList/Entry/TimingAnimation';
 import SpreadList from './screens/AnimationList/Entry/SpreadList';
+
+//来自YouTube的demo
+import MusicAppLogin from './screens/Youtube/MusicApp';
+
 export default class App extends Component {
   render() {
     return (
@@ -66,6 +70,8 @@ export default class App extends Component {
           <Scene hideNavBar key='entryanimation' component={EntryAnimation} />
           <Scene hideNavBar key='entry1' component={TimingAnimation} />
           <Scene hideNavBar key='spreadlist' component={SpreadList} />
+          {/* 来自YouTube的demo */}
+          <Scene hideNavBar key='musicapp' component={MusicAppLogin} />
         </Scene>
         {/* Loading和Toash全局加载 */}
       </Router>

@@ -96,7 +96,16 @@ export default class SwitchTabView extends Component {
       case 2:
         Screen = (
           <Content>
-            <Text>第三页</Text>
+            <List>
+              <ListItem onPress={() => Actions.musicapp()}>
+                <Left>
+                  <Text>To Youtube_Login</Text>
+                </Left>
+                <Right>
+                  <Icon name='arrow-forward' />
+                </Right>
+              </ListItem>
+            </List>
           </Content>
         );
         break;
