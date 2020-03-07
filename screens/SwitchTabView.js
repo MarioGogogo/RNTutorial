@@ -105,6 +105,14 @@ export default class SwitchTabView extends Component {
                   <Icon name='arrow-forward' />
                 </Right>
               </ListItem>
+              <ListItem onPress={() => Actions.addbutton()}>
+                <Left>
+                  <Text>To Youtube_AddButton</Text>
+                </Left>
+                <Right>
+                  <Icon name='arrow-forward' />
+                </Right>
+              </ListItem>
             </List>
           </Content>
         );

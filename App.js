@@ -38,6 +38,7 @@ import SpreadList from './screens/AnimationList/Entry/SpreadList';
 
 //来自YouTube的demo
 import MusicAppLogin from './screens/Youtube/MusicApp';
+import AddButton from './screens/Youtube/AddButton';
 
 export default class App extends Component {
   render() {
@@ -72,6 +73,7 @@ export default class App extends Component {
           <Scene hideNavBar key='spreadlist' component={SpreadList} />
           {/* 来自YouTube的demo */}
           <Scene hideNavBar key='musicapp' component={MusicAppLogin} />
+          <Scene hideNavBar key='addbutton' component={AddButton} />
         </Scene>
         {/* Loading和Toash全局加载 */}
       </Router>
