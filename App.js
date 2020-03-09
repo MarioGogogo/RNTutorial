@@ -19,6 +19,7 @@ import GridLayoutScreen from './screens/ListView/GridLayoutScreen';
 import SectionListPage from './screens/SectionList';
 import SwipeListView from './screens/SwipeList';
 import PullRefreshScreen from './screens/PullRefresh';
+import PullRefreshScreen2 from './screens/PullRefresh2';
 import TexTInputScreen from './screens/TextInput';
 import RegisterScreen from './screens/TextInput/RegisterScreen';
 import AutoNewLineInputScreen from './screens/TextInput/AutoNewLineInput';
@@ -55,6 +56,7 @@ export default class App extends Component {
           <Scene hideNavBar key='sectionlist' component={SectionListPage} />
           <Scene hideNavBar key='swipelist' component={SwipeListView} />
           <Scene hideNavBar key='pullrefresh' component={PullRefreshScreen} />
+          <Scene hideNavBar key='pullrefresh2' component={PullRefreshScreen2} />
           <Scene hideNavBar key='textinput' component={TexTInputScreen} />
           <Scene hideNavBar key='register' component={RegisterScreen} />
           <Scene hideNavBar key='autonewlineinput' component={AutoNewLineInputScreen} />
@@ -71,6 +73,7 @@ export default class App extends Component {
           <Scene hideNavBar key='entryanimation' component={EntryAnimation} />
           <Scene hideNavBar key='entry1' component={TimingAnimation} />
           <Scene hideNavBar key='spreadlist' component={SpreadList} />
+
           {/* 来自YouTube的demo */}
           <Scene hideNavBar key='musicapp' component={MusicAppLogin} />
           <Scene hideNavBar key='addbutton' component={AddButton} />

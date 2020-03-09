@@ -66,6 +66,14 @@ export default class SwitchTabView extends Component {
                   <Icon name='arrow-forward' />
                 </Right>
               </ListItem>
+              <ListItem onPress={() => Actions.pullrefresh2()}>
+                <Left>
+                  <Text> To PullRefresh2</Text>
+                </Left>
+                <Right>
+                  <Icon name='arrow-forward' />
+                </Right>
+              </ListItem>
               <ListItem onPress={() => Actions.textinput()}>
                 <Left>
                   <Text> To TextInput</Text>
