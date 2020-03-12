@@ -6,6 +6,15 @@ import { View, Text, StyleSheet, FlatList, RefreshControl, ActivityIndicator, Di
 const width = Dimensions.get('window').width;
 const height = Dimensions.get('window').height;
 
+export const RefreshState = {
+  Idle             : 0,
+  HeaderRefreshing : 1,
+  FooterRefreshing : 2,
+  NoMoreData       : 3,
+  Failure          : 4,
+  EmptyData        : 5
+};
+
 export default class PullAndLoadScreen extends Component {
   static defaultProps = {
     data                   : [],
@@ -30,18 +39,23 @@ export default class PullAndLoadScreen extends Component {
 
   _ListFooterComponent = () => {
     const { data, nomore, animating } = this.props;
-    return (
-      <View style={styles.bottomfoot}>
-        {data.length != 0 ? nomore ? (
-          <Text style={styles.footText}>- 我是有底线的 -</Text>
-        ) : (
+    let footerComp = null;
+    if (data.length != 0) {
+      if (nomore) {
+        footerComp = <Text style={styles.footText}>- 我是有底线的 -</Text>;
+      } else {
+        //如果有动画则显示动画
+        footerComp = animating ? (
           <View style={styles.activeLoad}>
             <ActivityIndicator size='small' animating={animating} />
             <Text style={[ styles.footText, styles.ml ]}>加载更多...</Text>
           </View>
-        ) : null}
-      </View>
-    );
+        ) : null;
+      }
+    } else {
+      footerComp = null;
+    }
+    return <View style={styles.bottomfoot}>{footerComp}</View>;
   };
   _renderItem = (item) => {
     return this.props.renderItem(item);

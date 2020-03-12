@@ -1,70 +1,91 @@
-import React, { Component } from 'react';
-import { Text, StyleSheet, View, Dimensions, TouchableOpacity } from 'react-native';
-import HeaderIconButtonExample from '../common/Header';
-import PullRefresh from './PullRefresh';
-const height = Dimensions.get('window').height;
-const datas = Array(10).fill('').map((_, i) => ({ key: `${i}`, text: `item #${i}` }));
+//
+//  Created by Liu Jinyong on 17/4/5.
+//  Copyright © 2016年 Liu Jinyong. All rights reserved.
+//
+//  @flow
+//  Github:
+//  https://github.com/huanxsd/react-native-refresh-list-view
 
-export default class PullRefresh2 extends Component {
+import React, { Component } from 'react';
+import { View, StyleSheet, Text, Platform } from 'react-native';
+import RefreshListView, { RefreshState } from './RefreshListView';
+import HeaderIconButtonExample from '../common/Header';
+class Demo extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
-      data       : [],
-      pageSize   : 0,
-      nomore     : false,
-      show       : false,
-      rightTitle : '编辑'
+      dataList     : [],
+      refreshState : RefreshState.Idle
     };
   }
 
   componentDidMount() {
-    const ListNums = this.fullScreenJusting(50);
-    console.log('一个屏幕满足多少条目', ListNums);
-    this.onEndReachedCalled = false; //初始化不刷新
-
-    setTimeout(() => {
-      this.setState({
-        data     : datas,
-        pageSize : ListNums,
-        nomore   : datas.length <= ListNums ? true : false
-      });
-    }, 1000);
+    this.onHeaderRefresh();
   }
 
-  //满屏页面判断
-  fullScreenJusting(ItemHeight) {
-    const screnHeight = height; //屏幕高度
-    //计算列表个数
-    const listNum = (screnHeight - 150) / ItemHeight;
-    return Math.ceil(listNum);
-  }
-
-  RandomData = () => {
-    return Array(10)
+  // 获取测试数据
+  getTestList(isReload) {
+    let newList = Array(10)
       .fill('')
-      .map((_, i) => ({ key: `${Math.ceil(Math.random() * 1000)}`, text: `item #${Math.ceil(Math.random() * 1000)}` }));
-  };
+      .map((_, i) => ({ key: `${new Date().getTime() + i}`, text: `item #${i}`, total: 30 }));
+    return isReload ? (Math.random() < 0.2 ? [] : newList) : [ ...this.state.dataList, ...newList ];
+  }
 
-  load = () => {
-    //初始化加载一次
-    console.log('刷新请求');
+  onHeaderRefresh = () => {
+    console.log('2秒刷新');
+    this.setState({ refreshState: RefreshState.HeaderRefreshing });
+
+    // 模拟网络请求
     setTimeout(() => {
+      // 模拟网络加载失败的情况
+      // if (Math.random() < 0.2) {
+      //   this.setState({ refreshState: RefreshState.Failure });
+      //   return;
+      // }
+
+      //获取测试数据
+      let dataList = this.getTestList(true);
+
+      const state =
+        dataList.length < 1
+          ? RefreshState.EmptyData
+          : dataList.length >= dataList[0].total ? RefreshState.NoMoreData : RefreshState.Idle;
+
       this.setState({
-        data : this.RandomData().concat(this.state.data)
+        dataList     : dataList,
+        refreshState : state,
+        total        : dataList[0] && dataList[0].total
       });
-    }, 1000);
+    }, 2000);
   };
 
-  loadNext = () => {
-    if (!this.state.nomore && this.onEndReachedCalled) {
-      console.log('下一页请求');
+  onFooterRefresh = () => {
+    this.setState({ refreshState: RefreshState.FooterRefreshing });
+    console.log('底部加载');
+
+    // 模拟网络请求
+    setTimeout(() => {
+      // 模拟网络加载失败的情况
+      if (Math.random() < 0.2) {
+        this.setState({ refreshState: RefreshState.Failure });
+        return;
+      }
+
+      //获取测试数据
+      let dataList = this.getTestList(false);
+      console.log('加载数据', dataList.length);
       this.setState({
-        nomore : true,
-        data   : this.state.data.concat(this.RandomData())
+        dataList     : dataList,
+        refreshState : dataList.length >= this.state.total ? RefreshState.NoMoreData : RefreshState.Idle
       });
-    }
-    this.onEndReachedCalled = true;
+    }, 2000);
   };
+
+  keyExtractor = (item, index) => {
+    return item.key.toString();
+  };
+
   renderItem(item) {
     return (
       <View style={styles.item}>
@@ -72,46 +93,20 @@ export default class PullRefresh2 extends Component {
       </View>
     );
   }
-  fn = () => {
-    this.setState({
-      rightTitle : '取消',
-      show       : true
-    });
-  };
-  change = () => {
-    this.setState(
-      {
-        rightTitle : '编辑',
-        show       : false
-      },
-      () => {
-        this.load();
-      }
-    );
-  };
 
   render() {
+    console.log('render scene');
     return (
       <View style={styles.container}>
-        <HeaderIconButtonExample cancel={this.fn} rightTitle={this.state.rightTitle} />
-        <PullRefresh
-          data={this.state.data}
-          keyExtractor={(item, index) => item.key.toString()}
-          onEndReached={this.loadNext}
-          colors={'#fff'}
-          nomore={this.state.nomore}
-          progressBackgroundColor={'#fff'}
-          onRefresh={this.load}
+        <HeaderIconButtonExample />
+        <RefreshListView
+          data={this.state.dataList}
+          keyExtractor={this.keyExtractor}
           renderItem={this.renderItem}
+          refreshState={this.state.refreshState}
+          onHeaderRefresh={this.onHeaderRefresh}
+          onFooterRefresh={this.onFooterRefresh}
         />
-        {this.state.show && (
-          <TouchableOpacity
-            style={{ backgroundColor: 'red', width: 60, height: 60, position: 'absolute', right: 10, bottom: 120 }}
-            onPress={this.change}
-          >
-            <Text>点击状态改变</Text>
-          </TouchableOpacity>
-        )}
       </View>
     );
   }
@@ -127,6 +122,8 @@ const styles = StyleSheet.create({
     justifyContent  : 'center',
     alignItems      : 'center',
     backgroundColor : '#ffffff',
-    height          : 50
+    height          : 80
   }
 });
+
+export default Demo;
