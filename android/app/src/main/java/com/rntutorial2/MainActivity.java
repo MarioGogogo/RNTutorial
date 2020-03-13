@@ -1,7 +1,7 @@
 package com.rntutorial2;
+
 import android.os.Bundle;
 import com.facebook.react.ReactActivity;
-//极光
 import cn.jpush.android.api.JPushInterface;
 
 
@@ -14,7 +14,7 @@ public class MainActivity extends ReactActivity {
     protected String getMainComponentName() {
         return "RNTutorial2";
     }
- //极光
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,4 +32,5 @@ public class MainActivity extends ReactActivity {
         super.onResume();
         JPushInterface.onResume(this);
     }
+ 
 }

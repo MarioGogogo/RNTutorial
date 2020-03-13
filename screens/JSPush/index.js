@@ -1,68 +1,75 @@
 import React, { Component } from 'react';
-import { Text, View } from 'react-native';
+import { Platform, View, Text } from 'react-native';
 import JPushModule from 'jpush-react-native';
 
-export default class index extends Component {
+export default class App extends Component {
+  state = {
+    alias : 'rn001' //设备别名
+  };
   componentDidMount() {
-    // 在收到点击事件之前调用此接口
-    JPushModule.notifyJSDidLoad((resultCode) => {
-      if (resultCode === 0) {
+    if (Platform.OS === 'android') {
+      // JPushModule.initPush();
+      // // 设置android端监听
+      // JPushModule.notifyJSDidLoad((resultCode) => {
+      //   if (resultCode === 0) {
+      //     console.log('设置监听成功');
+      //   }
+      //   JPushModule.addGetRegistrationIdListener((registrationId) => {
+      //     console.log('设备注册成功，registrationId: ' + registrationId);
+      //   });
+      // });
+      if (Platform.OS === 'android') {
+        JPushModule.initPush();
+      } else {
+        JPushModule.setupPush();
       }
-    });
+      JPushModule.setAlias(
+        this.state.alias,
+        () => {
+          console.log('成功设置 alias');
+        },
+        () => {
+          console.log('设置 alias 失败');
+        }
+      );
+      JPushModule.addReceiveCustomMsgListener((ret) => {
+        const data = JSON.parse(ret.extras);
+        this.setState({ id: data.id });
+      });
+      JPushModule.addReceiveNotificationListener(() => {});
+      JPushModule.addReceiveOpenNotificationListener(() => {
+        this.props.navigation.navigate('Article', { id: this.state.id, type: '推荐' });
+      });
+      JPushModule.addGetRegistrationIdListener(
+        (registrationId) => {
+          console.log(`Device register succeed, registrationId ${registrationId}`);
+        },
+        (error) => {
+          console.error(`获取不到`, error);
+        }
+      );
+    }
     JPushModule.addReceiveNotificationListener((map) => {
-      console.log('alertContent: ' + map.alertContent);
-      console.log('extras: ' + map.extras);
-      // var extra = JSON.parse(map.extras);
-      // console.log(extra.key + ": " + extra.value);
+      console.log('收到推送消息');
+      console.log(map);
+      // TODO: 处理通知消息
+    });
+    JPushModule.addReceiveOpenNotificationListener((map) => {
+      console.log('监听到点击通知的事件');
+      console.log(map);
+      // TODO: 跳转界面
     });
   }
-  //点击通知   在用户点击通知后，将会触发此事件。
-  componentDidMount() {
-    JPushModule.addGetRegistrationIdListener((registrationId) => {
-      console.log('Device register succeed, registrationId ' + registrationId);
-    });
-  }
-  //   清除所有通知
-  // 建议在用户退出前台后调用。
+
   componentWillUnmount() {
     console.log('Will clear all notifications');
     JPushModule.clearAllNotifications();
   }
 
-  setTag() {
-    if (this.state.tag !== undefined) {
-      /*
-        * 请注意这个接口要传一个数组过去，这里只是个简单的示范
-        */
-
-      JPushModule.setTags(
-        [ 'VIP', 'NOTVIP' ],
-        () => {
-          console.log('Set tag succeed');
-        },
-        () => {
-          console.log('Set tag failed');
-        }
-      );
-    }
-  }
-  setAlias() {
-    if (this.state.alias !== undefined) {
-      JPushModule.setAlias(
-        this.state.alias,
-        () => {
-          console.log('Set alias succeed');
-        },
-        () => {
-          console.log('Set alias failed');
-        }
-      );
-    }
-  }
   render() {
     return (
       <View>
-        <Text> textInComponent </Text>
+        <Text>button</Text>
       </View>
     );
   }

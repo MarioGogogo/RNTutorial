@@ -2,9 +2,9 @@
   package="com.rntutorial2">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <!-- Required . Enable it you can get statistics data with channel -->
-    <meta-data android:name="JPUSH_CHANNEL" android:value="${APP_CHANNEL}"/>
-    <meta-data android:name="JPUSH_APPKEY" android:value="${JPUSH_APPKEY}"/>
+  <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+    <!--下面这行权限必须要加上，格式为"app包名.permission.JPUSH_MESSAGE"，这里仅为示例-->
+    <uses-permission android:name="com.rntutorial2.permission.JPUSH_MESSAGE"/>
     <application
       android:name=".MainApplication"
       android:label="@string/app_name"
@@ -22,7 +22,16 @@
             <category android:name="android.intent.category.LAUNCHER" />
         </intent-filter>
       </activity>
+
+         <meta-data
+        android:name="JPUSH_APPKEY"
+        android:value="${JPUSH_APPKEY}" />
+    <meta-data
+        android:name="JPUSH_CHANNEL"
+        android:value="${APP_CHANNEL}" />
+
       <activity android:name="com.facebook.react.devsupport.DevSettingsActivity" />
+
     </application>
 
 </manifest>
